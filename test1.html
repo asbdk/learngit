@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+            float:left;
+        }
+        select{
+            width:200px;
+            height:300px;
+
+        }
+        input{
+            display: block;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <select id="leftSelect" multiple>
+        <option>张飞</option>
+        <option>关羽</option>
+        <option>刘备</option>
+        <option>诸葛亮</option>
+        <option>曹操</option>
+    </select>
+</div>
+<div>
+    <input type="button" value=">" onclick="moveRight()"/>
+    <input type="button" value=">>" onclick="moveAllRight()"/>
+    <input type="button" value="<"/>
+    <input type="button" value="<<"/>
+</div>
+<div>
+    <select id="rightSelect" multiple>
+
+    </select>
+
+</div>
+<div>
+    <input type="button" value="up" onclick="up()"/>
+    <input type="button" value="down" onclick="down()"/>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    function moveRight(){
+        console.log($("#leftSelect:selected"));
+        $("#rightSelect").append($("#leftSelect option:selected"));
+
+    }
+    function moveAllRight(){
+        $("#rightSelect").append($("#leftSelect option"));
+    }
+    function up(){
+        for(var i = 0;i < $("#leftSelect option:selected").length;i++){
+            if(!$("#leftSelect option:selected").eq(i).prev().prop("selected")){
+                $("#leftSelect option:selected").eq(i).prev().before($("#leftSelect option:selected").eq(i));
+
+            }
+        }
+
+//        $("#leftSelect option:selected").prev().before($("#leftSelect option:selected"));
+    }
+    function down(){
+
+        for(var i = $("#leftSelect option:selected").length - 1;i >= 0;i--){
+            if(!$("#leftSelect option:selected").eq(i).next().prop("selected")){
+                $("#leftSelect option:selected").eq(i).next().after($("#leftSelect option:selected").eq(i));
+
+            }
+               }
+//        $("#leftSelect option:selected").next().after($("#leftSelect option:selected"));
+    }
+</script>
+</html>
