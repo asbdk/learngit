@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<select name="" id="province"></select>
+<select name="" id="city"></select>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    $(function(){
+        var province = ["四川","湖南","广东"];
+        var city = [["成都","绵阳","德阳"],["长沙","衡阳","浏阳"],["广州","东莞"]];
+        fillSelect(province,$("#province"));
+        fillSelect(city[$("#province").val()],$("#city"));
+        $("#province").change(function(){
+            fillSelect(city[$("#province").val()],$("#city"));
+        });
+
+        function fillSelect(ary,obj){
+            var str = "";
+            obj.empty();
+            for(var i = 0;i <ary.length;i++){
+                str += "<option value='"+i+"'>"+ary[i]+"</option>"
+            }
+            obj.append(str);
+        }
+    });
+</script>
+</html>
